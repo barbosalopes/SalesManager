@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SalesManager.Controllers.Products
+﻿namespace SalesManager.Controllers.Products
 {
-    public class Drink : Product
+    public class Food : Product
     {
         private static int MinAmount = 10;
 
-        public Drink(string name, double basePrice, double profit, double tax = 0) : base(name, basePrice, profit, tax)
+        public Food(string name, double basePrice, double profit, double tax = 0) : base(name, basePrice, profit, tax)
         {
         }
 
@@ -27,17 +21,17 @@ namespace SalesManager.Controllers.Products
 
         public override double GetMaxProfit()
         {
-            return 0.4;
+            return 0.2;
         }
 
         public override double GetMinProfit()
         {
-            return 0.15;
+            return 0.1;
         }
 
         public override int GetTypeCode()
         {
-            return 1;
+            return 2;
         }
     }
 }

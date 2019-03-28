@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SalesManager.Controllers.Products
 {
-    public class Drink : Product
+    public class OfficeSupplie : Product
     {
         private static int MinAmount = 10;
 
-        public Drink(string name, double basePrice, double profit, double tax = 0) : base(name, basePrice, profit, tax)
+        public OfficeSupplie(string name, double basePrice, double profit, double tax = 0) : base(name, basePrice, profit, tax)
         {
         }
 
@@ -19,7 +19,6 @@ namespace SalesManager.Controllers.Products
             if (minAmount > 0)
                 MinAmount = minAmount;
         }
-
         public override int GetMinAmount()
         {
             return MinAmount;
@@ -27,17 +26,17 @@ namespace SalesManager.Controllers.Products
 
         public override double GetMaxProfit()
         {
-            return 0.4;
+            return 0.3;
         }
 
         public override double GetMinProfit()
         {
-            return 0.15;
+            return 0.1;
         }
 
         public override int GetTypeCode()
         {
-            return 1;
+            return 3;
         }
     }
 }

@@ -50,7 +50,10 @@
     <Compile Include="Controllers\Element\Item.cs" />
     <Compile Include="Controllers\InvalidProfitException.cs" />
     <Compile Include="Controllers\Product.cs" />
+    <Compile Include="Controllers\Products\DomesticUtensil.cs" />
     <Compile Include="Controllers\Products\Drink.cs" />
+    <Compile Include="Controllers\Products\Food.cs" />
+    <Compile Include="Controllers\Products\OfficeSuplie.cs" />
     <Compile Include="Controllers\Saleable.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
