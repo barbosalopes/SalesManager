@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SalesManager.Controllers.Exceptions;
+using System.Collections.Generic;
 
 namespace SalesManager.Controllers
 {
@@ -22,7 +23,7 @@ namespace SalesManager.Controllers
         {
             if (profit < GetMinProfit() || profit > GetMaxProfit())
             {
-                throw new InvalidProfitException(GetMinProfit(), GetMaxProfit());
+                throw new InvalidProfit(GetMinProfit(), GetMaxProfit());
             }
             else
             {

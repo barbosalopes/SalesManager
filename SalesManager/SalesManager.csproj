@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="Controllers\DataStructure\Queue.cs" />
     <Compile Include="Controllers\Element\Item.cs" />
-    <Compile Include="Controllers\InvalidProfitException.cs" />
+    <Compile Include="Controllers\Exceptions\InvalidProfit.cs" />
+    <Compile Include="Controllers\Exceptions\ProductUnavailable.cs" />
+    <Compile Include="Controllers\Movements\Sale.cs" />
     <Compile Include="Controllers\Product.cs" />
     <Compile Include="Controllers\Products\DomesticUtensil.cs" />
     <Compile Include="Controllers\Products\Drink.cs" />

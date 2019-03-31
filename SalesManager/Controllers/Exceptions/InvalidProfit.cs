@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SalesManager.Controllers
+namespace SalesManager.Controllers.Exceptions
 {
-    class InvalidProfitException : Exception
+    class InvalidProfit : Exception
     {
-        public InvalidProfitException(double min, double max) :
+        public InvalidProfit(double min, double max) :
             base("The profit must be between " + min + " and " + max)
         { }
     }

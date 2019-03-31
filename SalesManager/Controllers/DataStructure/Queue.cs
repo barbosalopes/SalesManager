@@ -33,7 +33,7 @@ namespace SalesManager.Controllers.DataStructure
             return Size() == 0;
         }
 
-        public virtual void Insert(Type value)
+        public virtual void Add(Type value)
         {
             Aux = new Item<Type>(value);
             if (IsEmpty())
@@ -47,14 +47,30 @@ namespace SalesManager.Controllers.DataStructure
 
         public virtual object Remove(Type value)
         {
+            Item<Type> toRemove = new Item<Type>(value);
+
             if (IsEmpty()) return null;
             else
             {
-                return null;
+                if(First.Equals(toRemove))
+                Aux = First;
+                while (Aux.Next != Last)
+                {
+                    if (Aux.Next.Equals(toRemove))
+                    {
+
+                    }
+                    Aux = Aux.Next;
+                }
+
+                Last = Aux;
+                Aux.Next = null;
+                
+                return Aux;
             }
         }
 
-        public Type Find(Type value)
+        public object Find(Type value)
         {
             Item<Type> aux = First;
             while (aux.Next != null)
@@ -63,7 +79,7 @@ namespace SalesManager.Controllers.DataStructure
                 aux = aux.Next;
             }
 
-            return default(Type);
+            return null;
         }
     }
 }
