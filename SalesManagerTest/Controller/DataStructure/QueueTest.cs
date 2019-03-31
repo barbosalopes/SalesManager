@@ -28,7 +28,7 @@ namespace SalesManagerTest.Controller.DataStructure
         }
 
         [TestMethod]
-        public void TestRemove()
+        public void TestRemoveFirtPos()
         {
             AuxQueue = new Queue<int>();
             int value = 2;
@@ -38,10 +38,36 @@ namespace SalesManagerTest.Controller.DataStructure
         }
 
         [TestMethod]
-        public void TestRemoveNonExistentValue()
+        public void TestRemove()
         {
             AuxQueue = new Queue<int>();
             int value = 2;
+
+            AuxQueue.Add(3);
+            AuxQueue.Add(value);
+            AuxQueue.Add(7);
+
+            Assert.AreEqual(value, AuxQueue.Remove(value));
+        }
+
+        [TestMethod]
+        public void TestRemoveEmpty()
+        {
+            AuxQueue = new Queue<int>();
+            int value = 2;
+
+            Assert.IsNull(AuxQueue.Remove(value));
+        }
+
+        [TestMethod]
+        public void TestRemoveNonExistentItem()
+        {
+            AuxQueue = new Queue<int>();
+            int value = 2;
+
+            AuxQueue.Add(3);
+            AuxQueue.Add(4);
+            AuxQueue.Add(7);
 
             Assert.IsNull(AuxQueue.Remove(value));
         }
@@ -60,6 +86,8 @@ namespace SalesManagerTest.Controller.DataStructure
         public void TestFindNonExistentValue()
         {
             AuxQueue = new Queue<int>();
+            AuxQueue.Add(3);
+            AuxQueue.Add(7);
             int value = 2;
 
             Assert.IsNull(AuxQueue.Find(value));

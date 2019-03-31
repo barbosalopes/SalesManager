@@ -1,11 +1,9 @@
 ﻿using SalesManager.Controllers.Element;
-using System;
-using System.Collections.Generic;
 namespace SalesManager.Controllers.DataStructure
 {
     public class Queue<Type>
     {
-        private Item<Type> First, Last, Aux;
+        private Item<Type> First, Last;
 
         public Queue()
         {
@@ -14,6 +12,7 @@ namespace SalesManager.Controllers.DataStructure
 
         public int Size()
         {
+            Item<Type> Aux;
             if (First == null) return 0;
             else
             {
@@ -35,7 +34,7 @@ namespace SalesManager.Controllers.DataStructure
 
         public virtual void Add(Type value)
         {
-            Aux = new Item<Type>(value);
+            Item<Type> Aux = new Item<Type>(value);
             if (IsEmpty())
                 First = Last = Aux;
             else
@@ -48,6 +47,7 @@ namespace SalesManager.Controllers.DataStructure
         public virtual object Remove(Type value)
         {
             Item<Type> toRemove = new Item<Type>(value);
+            Item<Type> Aux;
 
             if (IsEmpty()) return null;
             else
@@ -62,7 +62,7 @@ namespace SalesManager.Controllers.DataStructure
 
                 while (Aux.Next != null)
                 {
-                    if (Aux.Next.Equals(toRemove))
+                    if (Aux.Next.Value.Equals(toRemove.Value))
                     {
                         Aux.Next = Aux.Next.Next;
                         return toRemove.Value;
