@@ -53,9 +53,10 @@ namespace SalesManager.Controllers.DataStructure
             else
             {
                 Aux = First;
-                if (Aux.Equals(toRemove))
+                if (Aux.Value.Equals(toRemove.Value))
                 {
                     First = First.Next;
+                    return toRemove.Value;
                     // Remove reference for next
                 }
 
