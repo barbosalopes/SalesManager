@@ -17,7 +17,7 @@ namespace SalesManager.Controllers.DataStructure
             if (First == null) return 0;
             else
             {
-                int size = 1;
+                int size = 0;
                 Aux = First;
                 while (Aux != null)
                 {
@@ -52,27 +52,33 @@ namespace SalesManager.Controllers.DataStructure
             if (IsEmpty()) return null;
             else
             {
-                if(First.Equals(toRemove))
                 Aux = First;
-                while (Aux.Next != Last)
+                if (Aux.Equals(toRemove))
+                {
+                    First = First.Next;
+                    // Remove reference for next
+                }
+
+                while (Aux.Next != null)
                 {
                     if (Aux.Next.Equals(toRemove))
                     {
+                        Aux.Next = Aux.Next.Next;
+                        return toRemove.Value;
 
                     }
                     Aux = Aux.Next;
                 }
-
-                Last = Aux;
-                Aux.Next = null;
                 
-                return Aux;
+                return null;
             }
         }
 
         public object Find(Type value)
         {
             Item<Type> aux = First;
+            if (IsEmpty()) return null;
+            if (aux.Value.Equals(value)) return value;
             while (aux.Next != null)
             {
                 if (aux.Value.Equals(value)) return aux.Value;
