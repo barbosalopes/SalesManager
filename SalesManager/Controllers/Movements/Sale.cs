@@ -1,5 +1,6 @@
 ﻿using SalesManager.Controllers.DataStructure;
 using SalesManager.Controllers.Exceptions;
+using System.Text;
 
 namespace SalesManager.Controllers.Movements
 {
@@ -30,6 +31,14 @@ namespace SalesManager.Controllers.Movements
         public Queue<Product> GetProducts()
         {
             return Products;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Sale:");
+            str.AppendLine(Products.ToString());
+            return str.ToString();
         }
     }
 }

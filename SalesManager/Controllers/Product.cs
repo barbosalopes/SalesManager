@@ -1,5 +1,6 @@
 ﻿using SalesManager.Controllers.Exceptions;
 using System.Collections.Generic;
+using System.Text;
 
 namespace SalesManager.Controllers
 {
@@ -87,7 +88,9 @@ namespace SalesManager.Controllers
 
         public override string ToString()
         {
-            return GetName();
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Name: " + GetName() + "Value: R$" + GetPrice());
+            return str.ToString();
         }
 
         public Product Clone()

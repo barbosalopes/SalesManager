@@ -1,4 +1,6 @@
 ﻿using SalesManager.Controllers.Element;
+using System.Text;
+
 namespace SalesManager.Controllers.DataStructure
 {
     public class Queue<Type>
@@ -87,6 +89,19 @@ namespace SalesManager.Controllers.DataStructure
             }
 
             return null;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            Item<Type> Aux = First;
+
+            while(Aux != null)
+            {
+                str.Append(Aux.Value.ToString());
+                Aux = Aux.Next;
+            }
+            return str.ToString();
         }
     }
 }

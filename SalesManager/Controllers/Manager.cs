@@ -1,10 +1,7 @@
-﻿using SalesManager.Controllers.Movements;
+﻿using SalesManager.Controllers.DataStructure;
+using SalesManager.Controllers.Movements;
 using SalesManager.Controllers.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SalesManager.Controllers
 {
@@ -17,6 +14,16 @@ namespace SalesManager.Controllers
         {
             Sales = new Queue<Sale>();
             CurrentSale = new Sale();
+        }
+
+        public void AddSale()
+        {
+            if(CurrentSale.GetProducts().Size() != 0)
+            {
+                Sales.Add(CurrentSale);
+                CurrentSale = new Sale();
+            }
+
         }
 
         public void AddProduct(Product product, int amount = 1)
@@ -40,9 +47,23 @@ namespace SalesManager.Controllers
             AddProduct(new DomesticUtensil(name, basePrice, profit, tax), amount);
         }
 
-        public void AddOfficeSuplie(string name, double basePrice, double profit, int amount = 1, double tax = 0)
+        public void AddOfficeSupplie(string name, double basePrice, double profit, int amount = 1, double tax = 0)
         {
             AddProduct(new OfficeSupplie(name, basePrice, profit, tax), amount);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Current Sale: ");
+            if (CurrentSale.GetProducts().Size() != 0)
+                str.AppendLine(CurrentSale.ToString());
+            else
+                str.AppendLine("No items");
+
+            str.AppendLine("Sales:");
+            str.AppendLine(Sales.ToString());
+            return str.ToString();
         }
     }
 }
