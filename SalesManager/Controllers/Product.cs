@@ -89,5 +89,10 @@ namespace SalesManager.Controllers
         {
             return GetName();
         }
+
+        public Product Clone()
+        {
+            return (Product)MemberwiseClone();
+        }
     }
 }
