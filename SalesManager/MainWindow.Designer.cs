@@ -228,9 +228,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 482);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.Lucro);
             this.Controls.Add(this.profit);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.tax);
             this.Controls.Add(this.basePrice);
             this.Controls.Add(this.label3);
