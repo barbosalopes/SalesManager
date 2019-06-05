@@ -1,16 +1,20 @@
-﻿using SalesManager.Controllers.Exceptions;
-using System.Collections.Generic;
+﻿using SalesManager.Controllers.DataStructure;
+using SalesManager.Controllers.Exceptions;
+using SalesManager.Controllers.Movements;
+using System;
 using System.Text;
 
 namespace SalesManager.Controllers
 {
-    public abstract class Product : Saleable
+    public abstract class Product : Saleable, IComparable
     {
         protected double BasePrice;
         protected double Tax;
         protected double Profit;
         protected string Name;
 
+        protected Queue<int> salesNumbers;
+        public Queue<int> SalesNumber { get { return salesNumbers; } }
 
         public Product(string name, double basePrice, double profit, double tax = 0)
         {
@@ -18,6 +22,7 @@ namespace SalesManager.Controllers
             Tax = tax;
             Profit = profit;
             Name = name;
+            salesNumbers = new Queue<int>();
         }
 
         public virtual void SetProfit(double profit)
@@ -67,6 +72,7 @@ namespace SalesManager.Controllers
         {
             return Name;
         }
+
         public abstract int GetTypeCode();
 
         public override bool Equals(object obj)
@@ -82,7 +88,7 @@ namespace SalesManager.Controllers
             hashCode = hashCode * -1521134295 + BasePrice.GetHashCode();
             hashCode = hashCode * -1521134295 + Tax.GetHashCode();
             hashCode = hashCode * -1521134295 + Profit.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + System.Collections.Generic.EqualityComparer<string>.Default.GetHashCode(Name);
             return hashCode;
         }
 
@@ -93,9 +99,20 @@ namespace SalesManager.Controllers
             return str.ToString();
         }
 
+        public void AddSale(int Identifier)
+        {
+            salesNumbers.Add(Identifier);
+        }
+
         public Product Clone()
         {
             return (Product)MemberwiseClone();
+        }
+
+        public int CompareTo(object obj)
+        {
+            Product toCompare = (Product)obj;
+            return Name.CompareTo(toCompare.Name);
         }
     }
 }

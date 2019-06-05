@@ -1,6 +1,6 @@
 ﻿using System;
 
-cusing System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +15,23 @@ namespace SalesManager.Controllers.Element
         public TreeItem<Type> Left { set; get; }
 
         public TreeItem<Type> Right { set; get; }
+
+        public TreeItem<Type> Predecessor { set; get; }
+
+        public int Rate
+        {
+            get
+            {
+                if (Left != null && Right != null)
+                    return 2;
+                else if (Left != null)
+                    return -1;
+                else if (Right != null)
+                    return 1;
+                else
+                    return 0;
+            }
+        }
 
         public TreeItem(Type value)
         {

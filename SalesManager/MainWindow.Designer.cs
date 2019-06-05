@@ -46,6 +46,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.Lucro = new System.Windows.Forms.Label();
             this.profit = new System.Windows.Forms.NumericUpDown();
+            this.button2 = new System.Windows.Forms.Button();
+            this.report_product_name = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.report_product_code = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.amount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.basePrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tax)).BeginInit();
@@ -65,9 +72,9 @@
             // createNewSale
             // 
             this.createNewSale.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.createNewSale.Location = new System.Drawing.Point(208, 410);
+            this.createNewSale.Location = new System.Drawing.Point(144, 393);
             this.createNewSale.Name = "createNewSale";
-            this.createNewSale.Size = new System.Drawing.Size(200, 60);
+            this.createNewSale.Size = new System.Drawing.Size(202, 44);
             this.createNewSale.TabIndex = 1;
             this.createNewSale.TabStop = false;
             this.createNewSale.Text = "Create new sale";
@@ -79,7 +86,7 @@
             this.console.Location = new System.Drawing.Point(444, 58);
             this.console.Name = "console";
             this.console.ReadOnly = true;
-            this.console.Size = new System.Drawing.Size(344, 412);
+            this.console.Size = new System.Drawing.Size(479, 622);
             this.console.TabIndex = 2;
             this.console.Text = "";
             // 
@@ -130,9 +137,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(25, 338);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 20);
+            this.label1.Size = new System.Drawing.Size(65, 20);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Quantidade";
+            this.label1.Text = "Amount";
             // 
             // amount
             // 
@@ -211,9 +218,9 @@
             this.Lucro.AutoSize = true;
             this.Lucro.Location = new System.Drawing.Point(144, 339);
             this.Lucro.Name = "Lucro";
-            this.Lucro.Size = new System.Drawing.Size(43, 20);
+            this.Lucro.Size = new System.Drawing.Size(34, 20);
             this.Lucro.TabIndex = 19;
-            this.Lucro.Text = "Taxa";
+            this.Lucro.Text = "Tax";
             // 
             // profit
             // 
@@ -223,11 +230,80 @@
             this.profit.Size = new System.Drawing.Size(108, 26);
             this.profit.TabIndex = 18;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(29, 512);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(109, 29);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "GetSales";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // report_product_name
+            // 
+            this.report_product_name.Location = new System.Drawing.Point(28, 480);
+            this.report_product_name.Name = "report_product_name";
+            this.report_product_name.Size = new System.Drawing.Size(147, 26);
+            this.report_product_name.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(29, 457);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(110, 20);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Product Name";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(196, 457);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 20);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Product Code";
+            // 
+            // report_product_code
+            // 
+            this.report_product_code.Location = new System.Drawing.Point(195, 480);
+            this.report_product_code.Name = "report_product_code";
+            this.report_product_code.Size = new System.Drawing.Size(147, 26);
+            this.report_product_code.TabIndex = 25;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(196, 512);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 29);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Get Products";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(30, 571);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(312, 29);
+            this.button3.TabIndex = 27;
+            this.button3.Text = "Show Amount Earned and Spent";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 482);
+            this.ClientSize = new System.Drawing.Size(935, 692);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.report_product_code);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.report_product_name);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Lucro);
             this.Controls.Add(this.profit);
@@ -277,6 +353,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label Lucro;
         private System.Windows.Forms.NumericUpDown profit;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox report_product_name;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox report_product_code;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
     }
 }
 

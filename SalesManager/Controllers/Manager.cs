@@ -13,15 +13,14 @@ namespace SalesManager.Controllers
         public Manager()
         {
             Sales = new Queue<Sale>();
-            CurrentSale = new Sale();
         }
 
-        public void AddSale()
+        public void AddSale(int cod)
         {
             if(CurrentSale.GetProducts().Size() != 0)
             {
                 Sales.Add(CurrentSale);
-                CurrentSale = new Sale();
+                CurrentSale = new Sale(cod);
             }
 
         }
@@ -64,6 +63,14 @@ namespace SalesManager.Controllers
             str.AppendLine("Sales:");
             str.AppendLine(Sales.ToString());
             return str.ToString();
+        }
+
+        public static System.Collections.Generic.List<Product> ShowAllProducts(int type)
+        {
+            System.Collections.Generic.List<Product> productsToReturn = new System.Collections.Generic.List<Product>();
+            foreach (Product p in Stock.GetProducts().ToArray())
+                if (p.GetTypeCode() == type) productsToReturn.Add(p);
+            return productsToReturn;
         }
     }
 }

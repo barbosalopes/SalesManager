@@ -103,5 +103,17 @@ namespace SalesManager.Controllers.DataStructure
             }
             return str.ToString();
         }
+
+        public Type[] ToArray()
+        {
+            Type[] values = new Type[Size()];
+            Item<Type> Aux = First;
+            for(int i = 0; i < values.Length; i++)
+            {
+                values[i] = Aux.Value;
+                Aux = Aux.Next;
+            }
+            return values;
+        }
     }
 }

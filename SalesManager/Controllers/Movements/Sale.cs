@@ -1,16 +1,23 @@
 ﻿using SalesManager.Controllers.DataStructure;
 using SalesManager.Controllers.Exceptions;
+using System;
 using System.Text;
 
 namespace SalesManager.Controllers.Movements
 {
-    public class Sale
+    public class Sale : IComparable
     {
         protected Queue<Product> Products;
+        protected int cod;
 
-        public Sale()
+        public Sale(int cod)
         {
             Products = new Queue<Product>();
+        }
+
+        public int GetCod()
+        {
+            return cod;
         }
 
         public void AddProduct(Product product)
@@ -28,6 +35,30 @@ namespace SalesManager.Controllers.Movements
             }
         }
 
+        public double GetBilledValue()
+        {
+            double billedValue = 0;
+
+            foreach (Product product in Products.ToArray())
+            {
+                billedValue += product.GetPrice();
+            }
+
+            return billedValue;
+        }
+
+        public double GetBasePrice()
+        {
+            double basePrice = 0;
+
+            foreach (Product product in Products.ToArray())
+            {
+                basePrice += product.GetBasePrice();
+            }
+
+            return basePrice;
+        }
+
         public Queue<Product> GetProducts()
         {
             return Products;
@@ -39,6 +70,12 @@ namespace SalesManager.Controllers.Movements
             str.AppendLine("Sale:");
             str.AppendLine(Products.ToString());
             return str.ToString();
+        }
+
+        public int CompareTo(object obj)
+        {
+            Sale toCompare = (Sale)obj;
+            return GetHashCode().CompareTo(toCompare.GetHashCode());
         }
     }
 }

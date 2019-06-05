@@ -1,8 +1,9 @@
 ﻿using SalesManager.Controllers.Element;
+using System.Collections.Generic;
 
 namespace SalesManager.Controllers.DataStructure
 {
-    class Tree<Type>
+    public class Tree<Type>
     {
 
         public TreeItem<Type> root;
@@ -35,7 +36,9 @@ namespace SalesManager.Controllers.DataStructure
         public Type Search(Type value)
         {
             TreeItem<Type> item = new TreeItem<Type>(value);
-            return RecursiveSearch(item, root).Value;
+            item = RecursiveSearch(item, root);
+            if (item != null) return item.Value;
+            else return default(Type);
         }
 
         private TreeItem<Type> RecursiveSearch(TreeItem<Type> item, TreeItem<Type> root)
@@ -56,7 +59,9 @@ namespace SalesManager.Controllers.DataStructure
             TreeItem<Type> aux;
 
             RecursiveRemove(item, root, out aux);
-            return aux.Value;
+
+            if (aux != null) return aux.Value;
+            else return default(Type);
         }
 
         private TreeItem<Type> RecursiveRemove(TreeItem<Type> who, TreeItem<Type> where, out TreeItem<Type> output)
@@ -78,12 +83,50 @@ namespace SalesManager.Controllers.DataStructure
                     case -1: return where.Left;
                     case 1: return where.Right;
                     case 2:
-                        TreeItem<Type> predec = where.Predecessor;
+                        // Corrigir pois predec = where.predecessor. Codigo assim pra fazer funcionar o resto :p
+                        TreeItem<Type> predec = where;
                         where.Value = predec.Value;
                         where.Left = RecursiveRemove(predec, where.Left, out output);
+                        break;
                 }
             }
             return where;
+        }
+
+        public override string ToString()
+        {
+            return InOrder(root);
+        }
+
+        public Type[] ToArray()
+        {
+            return _toArray(root).ToArray();
+        } 
+
+        private List<Type> _toArray(TreeItem<Type> root)
+        {
+            if (root != null)
+            {
+                List<Type> aux = new List<Type>();
+                aux.AddRange(_toArray(root.Left));
+                aux.Add(root.Value);
+                aux.AddRange(_toArray(root.Right));
+                return aux;
+            }
+            else return new List<Type>();
+        }
+
+        private string InOrder(TreeItem<Type> root)
+        {
+            if (root != null)
+            {
+                string aux = "";
+                aux = InOrder(root.Left);
+                aux += "\n" + root.Value.ToString();
+                aux += "\n" + InOrder(root.Right);
+                return aux;
+            }
+            else return "";
         }
     }
 }
