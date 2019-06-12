@@ -72,10 +72,13 @@ namespace SalesManager.Controllers
                 // To avoid more complexity on reading from Sale.GetBasePrice and Sale.GetBilledValue
                 amountEarned += p.GetPrice();
                 amountSpent += p.GetBasePrice();
-
-                Product product = products.Search(p);
-                product.AddSale(sales.GetHashCode());
             }
+        }
+
+        public static void AddSaleToProduct(int saleCode, Product p)
+        {
+            Product product = products.Search(p);
+            product.AddSale(saleCode);
         }
     }
 }

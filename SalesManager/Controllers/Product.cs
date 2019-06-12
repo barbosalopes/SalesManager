@@ -13,8 +13,8 @@ namespace SalesManager.Controllers
         protected double Profit;
         protected string Name;
 
-        protected Queue<int> salesNumbers;
-        public Queue<int> SalesNumber { get { return salesNumbers; } }
+        protected System.Collections.Generic.Dictionary<int, int> salesNumbers;
+        public System.Collections.Generic.Dictionary<int, int> SalesNumber { get { return salesNumbers; } }
 
         public Product(string name, double basePrice, double profit, double tax = 0)
         {
@@ -22,7 +22,7 @@ namespace SalesManager.Controllers
             Tax = tax;
             Profit = profit;
             Name = name;
-            salesNumbers = new Queue<int>();
+            salesNumbers = new System.Collections.Generic.Dictionary<int, int>();
         }
 
         public virtual void SetProfit(double profit)
@@ -78,8 +78,7 @@ namespace SalesManager.Controllers
         public override bool Equals(object obj)
         {
             Product product = obj as Product;
-            return (GetName() == product.GetName()) &&
-                        GetType() == product.GetType();
+            return GetName() == product.GetName();
         }
 
         public override int GetHashCode()
@@ -95,13 +94,16 @@ namespace SalesManager.Controllers
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.AppendLine("Name: " + GetName() + "Value: R$" + GetPrice());
+            str.AppendLine("Name: " + GetName() + "\nValue: R$" + GetPrice());
             return str.ToString();
         }
 
         public void AddSale(int Identifier)
         {
-            salesNumbers.Add(Identifier);
+            if (salesNumbers.ContainsKey(Identifier))
+                salesNumbers[Identifier]++;
+            else
+                salesNumbers.Add(Identifier, 1);
         }
 
         public Product Clone()

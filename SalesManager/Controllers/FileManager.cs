@@ -47,8 +47,10 @@ namespace SalesManager.Controllers
                         p = new DomesticUtensil(name, basePrice, profit);
                         break;
                 }
+                
                 // Remove it because will be not needed now
                 //for (int i = 0; i < initialStock; i++)
+
                 if (Stock.GetProducts().Search(p) == null)
                     Stock.AddProduct(p);
             }
@@ -58,7 +60,6 @@ namespace SalesManager.Controllers
         {
             string line;
             StreamReader runFile = new StreamReader(@fileLocation);
-            StreamWriter controlFile = new StreamWriter(@"c:/Users/mateu/Documents/controlVendas.txt");
 
             Product p = null, pAux = null;
             Sale s = null;
@@ -68,9 +69,10 @@ namespace SalesManager.Controllers
             while ((line = runFile.ReadLine()) != null)
             {
                 string[] sellParams = line.Split(';');
-                productAmount = int.Parse(sellParams[1]);
                 saleCode = int.Parse(sellParams[0]);
+                productAmount = int.Parse(sellParams[1]);
                 s = new Sale(saleCode);
+
                 for (int i = 0; i < productAmount; i++)
                 {
                     line = runFile.ReadLine();
@@ -78,30 +80,15 @@ namespace SalesManager.Controllers
                     productName = saleParams[0];
                     selledAmount = int.Parse(saleParams[1]);
                     pAux = Stock.GetProduct(productName);
-
+                    
                     for (int j = 0; j < selledAmount; j++)
                     {
-                        switch (pAux.GetTypeCode())
-                        {
-                            case 1:
-                                p = new Drink(productName, pAux.GetBasePrice(), pAux.GetProfit());
-                                break;
-                            case 2:
-                                p = new Food(productName, pAux.GetBasePrice(), pAux.GetProfit());
-                                break;
-                            case 3:
-                                p = new OfficeSupplie(productName, pAux.GetBasePrice(), pAux.GetProfit());
-                                break;
-                            case 4:
-                                p = new DomesticUtensil(productName, pAux.GetBasePrice(), pAux.GetProfit());
-                                break;
-                        }
-                        s.AddProduct(p);
+                        s.AddProduct(pAux);
+                        Stock.AddSaleToProduct(s.GetHashCode(), pAux);
                     }
-                    Stock.AddSale(s);
                 }
+                Stock.AddSale(s);
             }
-            controlFile.Close();
         }
     }
 }

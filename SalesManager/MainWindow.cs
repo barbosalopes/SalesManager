@@ -17,7 +17,7 @@ namespace SalesManager
             InitializeComponent();
             manager = new Manager();
             FileManager.Build(@"C:\Users\mateu\Desktop\AED\AEDprodutos.txt");
-            FileManager.Run(@"C:\Users\mateu\Desktop\AED\AEDvendas_test.txt");
+            FileManager.Run(@"C:\Users\mateu\Desktop\AED\AEDvendas.txt");
             
         }
 
@@ -83,8 +83,20 @@ namespace SalesManager
         private void button2_Click_1(object sender, EventArgs e)
         {
             string productName = report_product_name.Text;
-            List<Sale> sales = new List<Sale>();
+            Product prod = Stock.GetProduct(productName);
+            console.Text = "";
+            if (prod != null)
+            {
+                StringBuilder s = new StringBuilder("Sales codes:");
+                foreach (int i in prod.SalesNumber.Keys)
+                    s.AppendLine(i.ToString());
 
+                console.Text = s.ToString();
+            } else
+            {
+                console.Text = "Product " + productName + " not found!";
+            }
+            
         }
     }
 }

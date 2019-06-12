@@ -98,7 +98,7 @@ namespace SalesManager.Controllers.DataStructure
 
             while(Aux != null)
             {
-                str.Append(Aux.Value.ToString());
+                str.AppendLine(Aux.Value.ToString());
                 Aux = Aux.Next;
             }
             return str.ToString();
