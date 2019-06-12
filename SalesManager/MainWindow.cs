@@ -1,5 +1,6 @@
 ﻿using SalesManager.Controllers;
 using SalesManager.Controllers.Movements;
+using SalesManager.Controllers.Products;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,7 @@ namespace SalesManager
     {
         private Manager manager;
         int nextCode = 38000;
+        private Sale currentSale;
 
         public MainWindow()
         {
@@ -18,23 +20,15 @@ namespace SalesManager
             manager = new Manager();
             FileManager.Build(@"C:\Users\mateu\Desktop\AED\AEDprodutos.txt");
             FileManager.Run(@"C:\Users\mateu\Desktop\AED\AEDvendas.txt");
-            
+            currentSale = new Sale(nextCode);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (drink.Checked)
-                manager.AddDrink(name.Text, (double)basePrice.Value, (double)profit.Value, 
-                    (int)amount.Value, (double)tax.Value);
-            else if(food.Checked)
-                manager.AddDrink(name.Text, (double)basePrice.Value, (double)profit.Value, 
-                    (int)amount.Value, (double)tax.Value);
-            else if (domesticUtensil.Checked)
-                manager.AddDomesticUtensil(name.Text, (double)basePrice.Value, (double)profit.Value,
-                    (int)amount.Value, (double)tax.Value);
-            else if (officeSupplie.Checked)
-                manager.AddOfficeSupplie(name.Text, (double)basePrice.Value, (double)profit.Value,
-                    (int)amount.Value, (double)tax.Value);
+            Product toAdd = Stock.GetProduct(name.Text);
+
+            for (int i = (int)amount.Value; i > 0; i--)
+                currentSale.AddProduct(toAdd);
 
             UpdateConsole();
             Reset();
@@ -42,24 +36,32 @@ namespace SalesManager
 
         private void createNewSale_Click(object sender, EventArgs e)
         {
-            manager.AddSale(nextCode);
+            Stock.AddSale(currentSale);
+            foreach(Product p in currentSale.GetProducts().ToArray())
+                Stock.AddSaleToProduct(currentSale.GetHashCode(), p);
+            
             nextCode++;
+            currentSale = new Sale(nextCode);
             UpdateConsole();
             Reset();
         }
 
         private void UpdateConsole()
         {
-            console.Text = manager.ToString();
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Current Sale: ");
+            if (currentSale.GetProducts().Size() != 0)
+                str.AppendLine(currentSale.ToString());
+            else
+                str.AppendLine("No items");
+            
+            console.Text = str.ToString();
         }
 
         private void Reset()
         {
             name.ResetText();
-            basePrice.ResetText();
-            profit.ResetText();
             amount.ResetText();
-            tax.ResetText();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -97,6 +99,12 @@ namespace SalesManager
                 console.Text = "Product " + productName + " not found!";
             }
             
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Reset();
+            console.Text = Manager.ShowProductWithBiggestSelledValue().ToString();
         }
     }
 }

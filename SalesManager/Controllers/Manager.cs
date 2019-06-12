@@ -15,16 +15,6 @@ namespace SalesManager.Controllers
             Sales = new Queue<Sale>();
         }
 
-        public void AddSale(int cod)
-        {
-            if(CurrentSale.GetProducts().Size() != 0)
-            {
-                Sales.Add(CurrentSale);
-                CurrentSale = new Sale(cod);
-            }
-
-        }
-
         public void AddProduct(Product product, int amount = 1)
         {
             for (int i = 0; i < amount; i++)
@@ -51,26 +41,32 @@ namespace SalesManager.Controllers
             AddProduct(new OfficeSupplie(name, basePrice, profit, tax), amount);
         }
 
-        public override string ToString()
-        {
-            StringBuilder str = new StringBuilder();
-            str.AppendLine("Current Sale: ");
-            if (CurrentSale.GetProducts().Size() != 0)
-                str.AppendLine(CurrentSale.ToString());
-            else
-                str.AppendLine("No items");
-
-            str.AppendLine("Sales:");
-            str.AppendLine(Sales.ToString());
-            return str.ToString();
-        }
-
         public static System.Collections.Generic.List<Product> ShowAllProducts(int type)
         {
             System.Collections.Generic.List<Product> productsToReturn = new System.Collections.Generic.List<Product>();
             foreach (Product p in Stock.GetProducts().ToArray())
                 if (p.GetTypeCode() == type) productsToReturn.Add(p);
             return productsToReturn;
+        }
+
+        public static Product ShowProductWithBiggestSelledValue()
+        {
+            Product[] products = Stock.GetProducts().ToArray();
+            Product product = new Food("Mock", 0, 0);
+            double mostSelledValue = 0, selledValue = 0;
+
+            foreach(Product p in products)
+            {
+                foreach (int sell in p.SalesNumber.Keys) selledValue += p.GetPrice() * p.SalesNumber[sell];
+                if(selledValue > mostSelledValue)
+                {
+                    mostSelledValue = selledValue;
+                    product = p;
+                }
+
+                selledValue = 0;
+            }
+            return product;
         }
     }
 }
